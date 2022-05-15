@@ -33,7 +33,7 @@
         <h2>Usage</h2>
         <p>To build a link directory, please include the script in your page and call the <code>printlinks()</code> function:
         </p>
-        <pre><code class='language-html' lang='html'>&lt;script src=&quot;printlinks.min.js&quot;&gt;&lt;/script&gt;
+        <pre><code class='language-html' lang='html'>&lt;script src=&quot;https://cdn.jsdelivr.net/gh/tollwerk/printlinks/dist/printlinks.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
     printlinks();
 &lt;/script&gt;
@@ -41,14 +41,14 @@
         <p>By default, the method uses the selector <code>a[href]:not([href^=&quot;javascript:&quot;])</code> to detect
             links in the page (= will detect each and every link pointing to a regular URL). If you want to customize
             the selector (e.g. for excluding navigations), you may provide a custom selector:</p>
-        <pre><code class='language-html' lang='html'>&lt;script src=&quot;printlinks.min.js&quot;&gt;&lt;/script&gt;
+        <pre><code class='language-html' lang='html'>&lt;script src=&quot;https://cdn.jsdelivr.net/gh/tollwerk/printlinks/dist/printlinks.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
     printlinks(&#39;main a[href]:not([href^=&quot;javascript:&quot;])&#39;);
 &lt;/script&gt;
 </code></pre>
         <p>You can use the <code>printlinks()</code> function with the <code>onbeforeprint</code> event to always build
             the link directory right before printing:</p>
-        <pre><code>&lt;script src=&quot;printlinks.min.js&quot;&gt;&lt;/script&gt;
+        <pre><code>&lt;script src=&quot;https://cdn.jsdelivr.net/gh/tollwerk/printlinks/dist/printlinks.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
     window.addEventListener(&#39;beforeprint&#39;, printlinks);
 &lt;/script&gt;
