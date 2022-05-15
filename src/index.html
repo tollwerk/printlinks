@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Printable link directory for an HTML page · tollwerk</title>
+        <style>
+            pre {
+                padding: 1em;
+                background-color: #eee;
+                border: 1px solid #000;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Printable link directory for an HTML page</h1>
+        <p>The core of this project is a JavaScript routine created by <a href='https://tollwerk.de'>tollwerk</a> which
+            — when applied on an HTML page — extracts all links on the page and appends a printable link directory to
+            the end of the page. The links are numbered and a tiny footnote reference is inserted right after the
+            occurrence on the page.</p>
+        <ul>
+            <li>When there are multiple references to the same URL within the page, it will only be
+                added once to the link directory (which is why the <a href='https://tollwerk.de'>tollwerk website</a> is
+                contained twice on this demo page 😉).
+            </li>
+            <li><a href="relative-url">Relative URLs</a> will be resolved to absolute URLs.</li>
+            <li>If there's a link directory on the page already, it will be deleted first (along with the references).
+            </li>
+        </ul>
+        <p>In addition, each link in the directory will be decorated with a small QR code encoding the link URL so that
+            you can use a QR code scanner to visit the link. QR codes are created with <a
+                href='https://github.com/papnkukn/qrcode-svg'>this library</a>.</p>
+
+        <h2>Usage</h2>
+        <p>To build a link directory, please include the script in your page and call the <code>printlinks()</code> function:
+        </p>
+        <pre><code class='language-html' lang='html'>&lt;script src=&quot;printlinks.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    printlinks();
+&lt;/script&gt;
+</code></pre>
+        <p>By default, the method uses the selector <code>a[href]:not([href^=&quot;javascript:&quot;])</code> to detect
+            links in the page (= will detect each and every link pointing to a regular URL). If you want to customize
+            the selector (e.g. for excluding navigations), you may provide a custom selector:</p>
+        <pre><code class='language-html' lang='html'>&lt;script src=&quot;printlinks.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    printlinks(&#39;main a[href]:not([href^=&quot;javascript:&quot;])&#39;);
+&lt;/script&gt;
+</code></pre>
+        <p>You can use the <code>printlinks()</code> function with the <code>onbeforeprint</code> event to always build
+            the link directory right before printing:</p>
+        <pre><code>&lt;script src=&quot;printlinks.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    window.addEventListener(&#39;beforeprint&#39;, printlinks);
+&lt;/script&gt;
+</code></pre>
+        <p>You might want to combine this with a print stylesheet to only display the link directory and references when
+            printing:</p>
+        <pre><code class='language-css' lang='css'>.tw-linklist, .tw-linkref {
+    display: none;
+}
+@media print {
+    .tw-linklist { display: block; }
+    .tw-linkref { display: inline; }
+}
+</code></pre>
+        <p>
+            <button
+                onclick="var s=document.createElement('style');s.appendChild(document.createTextNode('.tw-linklist,.tw-linkref{display: none}@media print{.tw-linklist{display:block}.tw-linkref{display:inline}}'));document.getElementsByTagName('head')[0].appendChild(s);">
+                Click here to add this very stylesheet
+            </button>
+        </p>
+        <h2>Installation as bookmarklet</h2>
+        <p>To install the script as a bookmarklet, drag the following link to your browser bookmarks:</p>
+        <ul>
+            <!-- inject:bookmarklet -->
+            <!-- endinject -->
+        </ul>
+        <p>You may also click on the link to test the script on this very page. Be aware that the bookmarklet uses the
+            default selector for links, i.e. it processes <strong>every link</strong> on the page (including menus
+            etc.).</p>
+    </body>
+</html>
